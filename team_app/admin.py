@@ -6,10 +6,16 @@ from team_app.models import (
     ServiceModel,
     AboutModel,
     CertificatesModel,
+    FeedbackModel,
 )
 from sorl.thumbnail.admin import AdminImageMixin
 
 # Register your models here.
+
+
+@admin.register(FeedbackModel)
+class AboutAdmin(admin.ModelAdmin):
+    list_display = ['name', 'email', 'subject', 'created']
 
 
 @admin.register(AboutModel)

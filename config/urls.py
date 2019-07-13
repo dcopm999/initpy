@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 
 # from django.views.generic import TemplateView
 from django.views import defaults as default_views
-from home.views import HomeView
+from team_app.views import HomeView
 
 
 urlpatterns = [

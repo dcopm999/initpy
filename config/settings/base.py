@@ -400,6 +400,7 @@ SUIT_CONFIG = {
              'team_app.contactmodel',
              'team_app.servicemodel',
              'team_app.aboutmodel',
+             'team_app.feedbackmodel',
          )},
         {'label': _('Accounts'),
          'icon': 'icon-user',

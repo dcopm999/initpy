@@ -96,17 +96,21 @@
     
     <div class="col-md-8 col-md-offset-2 col-xs-12 col-sm-12">
       <article class="contact-form">
-	<form action="contact">
+
+	<form action="{% url 'home' %}" method="POST">
+	  {% csrf_token %}
+	  <h4>{{form.errors}}</h4>
 	  <div class="col-md-5 col-md-offset-1 contact-form-left">
-	    <input class="name" type="text" placeholder="NAME*">
-	    <input class="email" type="email" placeholder="EMAIL*">
-	    <input class="subject" type="text" placeholder="SUBJECT*">
+	    {{form.name}}
+	    {{form.email}}
+	    {{form.subject}}
 	  </div>
 	  <div class="col-md-5 contact-form-right text-right">
-	    <textarea class="message" name="message" id="message" cols="30" rows="10" placeholder="MESSAGE"></textarea>
-	    <input type="submit" class="submit-btn" value="send message">
+	    {{form.body}}
+	    <input type="submit" class="submit-btn" value="{% trans 'send message' %}">
 	  </div>
 	</form>
+
       </article>
     </div>
   </div>

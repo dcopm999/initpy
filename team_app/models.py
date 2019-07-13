@@ -68,3 +68,18 @@ class CertificatesModel(models.Model):
     class Meta:
         verbose_name = _("certificate")
         verbose_name_plural = _("certificate list")
+
+
+class FeedbackModel(models.Model):
+    name = models.CharField(max_length=200, verbose_name=_("name"))
+    email = models.EmailField(verbose_name=_("Email"))
+    subject = models.CharField(max_length=200, verbose_name=_("subject"))
+    body = models.TextField(verbose_name=_("message body"))
+    created = models.DateTimeField(auto_now_add=True, editable=False, verbose_name=_("Created date"))
+
+    def __str__(self):
+        return self.email
+
+    class Meta:
+        verbose_name = _("feedback message")
+        verbose_name_plural = _("feedbacks")
