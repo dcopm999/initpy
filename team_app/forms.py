@@ -1,16 +1,7 @@
 from django import forms
-from ckeditor.widgets import CKEditorWidget
 from django.utils.translation import ugettext_lazy as _
 
-from team_app.models import TeamModel, FeedbackModel
-
-
-class TeamForm(forms.ModelForm):
-    skills = forms.CharField(widget=CKEditorWidget)
-
-    class Meta:
-        model = TeamModel
-        fields = '__all__'
+from team_app.models import FeedbackModel
 
 
 class FeedbackForm(forms.ModelForm):
