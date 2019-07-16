@@ -72,7 +72,7 @@ DJANGO_APPS = [
     "django.contrib.admin",
 ]
 THIRD_PARTY_APPS = [
-    "ckeditor",
+    # "ckeditor",
 ]
 
 LOCAL_APPS = [

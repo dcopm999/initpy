@@ -15,7 +15,7 @@ from team_app.models import (
 
 
 @admin.register(FeedbackModel)
-class AboutAdmin(admin.ModelAdmin):
+class FeedbackAdmin(admin.ModelAdmin):
     list_display = ['name', 'email', 'subject', 'created']
 
 
