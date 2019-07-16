@@ -1,25 +1,35 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from ckeditor.fields import RichTextField
-from sorl.thumbnail import ImageField
-
+from django.contrib.auth.models import User
 from django.conf import settings
 # Create your models here.
 
-User = settings.AUTH_USER_MODEL
+USER_MODEL = getattr(settings, 'AUTH_USER_MODEL', User)
 
 
 class TeamModel(models.Model):
-    user = models.ForeignKey(User, related_name="team", on_delete=models.CASCADE, verbose_name=_("User"))
-    skills = RichTextField(verbose_name=_("skills"))
+    user = models.ForeignKey(USER_MODEL, related_name="team", on_delete=models.CASCADE, verbose_name=_("User"))
     position = models.CharField(max_length=200, blank=True, verbose_name=_("position"))
+    photo = models.ImageField(upload_to="team/", blank=True, verbose_name=_("photo"))
 
     def __str__(self):
-        return self.user.__str__()
+        return "{0} {1}".format(self.user.first_name, self.user.last_name)
 
     class Meta:
         verbose_name = _("team member")
         verbose_name_plural = _("Team members")
+
+
+class SkillModel(models.Model):
+    user = models.ForeignKey(TeamModel, on_delete=models.CASCADE, related_name="skill", verbose_name=_("team member"))
+    skill = models.TextField(verbose_name=_("skill item"))
+
+    def __str__(self):
+        return self.skill
+
+    class Meta:
+        verbose_name = _("skill")
+        verbose_name_plural = _("skill list")
 
 
 class ContactModel(models.Model):
@@ -39,7 +49,6 @@ class ContactModel(models.Model):
 class ServiceModel(models.Model):
     icon = models.CharField(max_length=50, verbose_name=_("icon style"))
     title = models.CharField(max_length=250, verbose_name=_("type of service"))
-    desc = RichTextField(verbose_name=_("description"))
 
     def __str__(self):
         return self.title
@@ -49,18 +58,49 @@ class ServiceModel(models.Model):
         verbose_name_plural = _("service list")
 
 
+class ServiceItemModel(models.Model):
+    title = models.ForeignKey(
+        ServiceModel,
+        on_delete=models.CASCADE,
+        related_name="items",
+        verbose_name=_("service title")
+    )
+    desc = models.CharField(max_length=250, verbose_name=_("service item"))
+
+    def __str__(self):
+        return self.desc
+
+    class Meta:
+        verbose_name = _("service item")
+        verbose_name_plural = _("service item list")
+
+
 class AboutModel(models.Model):
     title = models.CharField(max_length=250, verbose_name=_("title"))
-    body = RichTextField(verbose_name=_('body'))
+
+    def __str__(self):
+        return self.title
 
     class Meta:
         verbose_name = _("about")
         verbose_name_plural = _("abouts")
 
 
+class AboutItemModel(models.Model):
+    title = models.ForeignKey(AboutModel, on_delete=models.CASCADE, related_name="items", verbose_name=_("about title"))
+    desc = models.CharField(max_length=250, verbose_name=_("about item"))
+
+    def __str__(self):
+        return self.desc
+
+    class Meta:
+        verbose_name = _("about item")
+        verbose_name_plural = _("about item list")
+
+
 class CertificatesModel(models.Model):
     user = models.ForeignKey(TeamModel, on_delete=models.CASCADE, related_name="cert", verbose_name=_("Team member"))
-    image = ImageField(upload_to="team/certificates/", blank=True, verbose_name=_("Image"))
+    image = models.ImageField(upload_to="team/certificates/", blank=True, verbose_name=_("Image"))
 
     def __str__(self):
         return self.user.__str__()

@@ -72,20 +72,11 @@ DJANGO_APPS = [
     "django.contrib.admin",
 ]
 THIRD_PARTY_APPS = [
-    "crispy_forms",
-    "allauth",
-    "allauth.account",
-    "allauth.socialaccount",
-    "rest_framework",
-    "django_celery_beat",
-    "sorl.thumbnail",
     "ckeditor",
 ]
 
 LOCAL_APPS = [
-    "initpy.users.apps.UsersConfig",
     "team_app",
-    # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -103,11 +94,11 @@ AUTHENTICATION_BACKENDS = [
     "allauth.account.auth_backends.AuthenticationBackend",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-user-model
-AUTH_USER_MODEL = "users.User"
+# AUTH_USER_MODEL = "users.User"
 # https://docs.djangoproject.com/en/dev/ref/settings/#login-redirect-url
-LOGIN_REDIRECT_URL = "users:redirect"
+# LOGIN_REDIRECT_URL = "users:redirect"
 # https://docs.djangoproject.com/en/dev/ref/settings/#login-url
-LOGIN_URL = "account_login"
+# LOGIN_URL = "account_login"
 
 # PASSWORDS
 # ------------------------------------------------------------------------------
@@ -405,14 +396,9 @@ SUIT_CONFIG = {
         {'label': _('Accounts'),
          'icon': 'icon-user',
          'models': (
-             'users.user',
+             'auth.user',
              'auth.group',
-             'account.emailaddress',
-             'socialaccount.socialaccount',
          )}
-        # {'app': 'auth', 'icon':'icon-lock', 'models': ('user', 'group')},
-        # {'label': 'Settings', 'icon':'icon-cog', 'models': ('auth.user', 'auth.group')},
-        # {'label': 'Support', 'icon':'icon-question-sign', 'url': '/support/'},
     ),
 
     # misc
