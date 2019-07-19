@@ -1,5 +1,10 @@
 jQuery(document).ready(function() {
-  
+
+    $(function () {
+	$('[data-toggle="popover"]').popover()
+    })
+
+
   //WOW js code
     new WOW().init();
 

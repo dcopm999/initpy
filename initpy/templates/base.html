@@ -23,79 +23,55 @@
   </head>
   <body>
     <!-- ====================================================header section -->
+
     <header class="top-header">
       <div class="container">
 	<div class="row">
 	  <!-- nav starts here -->
 	  <div class="col-md-12">
-	    
 	    {% block top_menu %}
 	    {% include 'top_menu.html' %}
 	    {% endblock top_menu %}
-	    
 	  </div>
 	</div>
       </div>
     </header><!-- end of header section -->
+
     
+
     <!-- banner section starts here -->
-    <section class="banner" id="home">
-      
+    <section class="banner" id="home">      
       {% block banner %}
-      <div class="container">
-	<div class="row">
-	  <div class="col-xs-6 wow fadeInLeft animated">
-	    <h3>
-	      text
-	    </h3>
-            <div class="area">
-              init.py
-	    </div>
-	    <p>Текст3</p>
-	    <button class="download-btn">download now</button>
-	    <button class="features-btn">view features</button>
-	  </div>
-	  <div class="col-xs-6 banner-img wow fadeInRight animated">
-	    <img class="img-responsive" src="{% static '/images/it.png' %}" alt="">
-	  </div>
-	</div>
-      </div>
-      {% endblock banner %}
-      
+      {% endblock banner %}      
     </section><!-- end of banner section -->
-    
+
+
     <!-- service section -->
-    <section class="features text-center" id="service">
-      
+    <div id="service-title">
+
+    </div>
+
+    <section class="service" id="service">
       {% block service %}
-      
       {% endblock service %}
-      
     </section><!-- end of service section -->
-    <hr>
-    <!-- details section -->
-    <section class="details" id="about">
-      
-      {% block about %}
-      
-      {% endblock about %}
-      
+    
+    <!-- about section -->
+    <section class="about" id="about">
+
+
     </section><!-- end of details section -->
     
     <!-- pricing-slide section starts here -->
-    <section class="pricing-slide" id="team">
+    <section class="team" id="team">
       {% block team %}  
-      
       {% endblock team %}
     </section><!-- end of pricing-slide section -->
     
     <!-- contact section -->
     <section class="contact text-center" id="contact">
-      
       {% block contact %}
-      
       {% endblock contact %}
-      
     </section><!-- end of contact section -->
     
     <!-- google map api -->
@@ -106,6 +82,7 @@
 	</div>
       </div>
     </div>
+
     <!-- footer starts here -->
     <footer class="footer text-center">
       <div class="container">

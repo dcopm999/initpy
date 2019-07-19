@@ -65,7 +65,7 @@ class ServiceItemModel(models.Model):
         related_name="items",
         verbose_name=_("service title")
     )
-    desc = models.CharField(max_length=250, verbose_name=_("service item"))
+    desc = models.TextField(verbose_name=_("service item"))
 
     def __str__(self):
         return self.desc
