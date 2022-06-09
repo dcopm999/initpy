@@ -1,13 +1,10 @@
 """
 Base settings to build other settings files upon.
 """
-import os
 import environ
 from django.utils.translation import ugettext_lazy as _
 
-ROOT_DIR = (
-    environ.Path(__file__) - 3
-)  # (initpy/config/settings/base.py - 3 = initpy/)
+ROOT_DIR = environ.Path(__file__) - 3  # (initpy/config/settings/base.py - 3 = initpy/)
 APPS_DIR = ROOT_DIR.path("initpy")
 
 env = environ.Env()
@@ -26,8 +23,8 @@ TIME_ZONE = "UTC"
 LANGUAGE_CODE = "en-us"
 
 LANGUAGES = (
-    ('ru', 'Russian'),
-    ('en', 'English'),
+    ("ru", "Russian"),
+    ("en", "English"),
 )
 
 SITE_ID = 1
@@ -38,7 +35,7 @@ LOCALE_PATHS = [ROOT_DIR.path("locale")]
 
 # DATABASES
 # ------------------------------------------------------------------------------
-DATABASES = {"default": env.db("DATABASE_URL")}
+DATABASES = {"default": env.db("DATABASE_URL", default="sqlite:///db.sqlite3")}
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
 # URLS
@@ -56,12 +53,12 @@ DJANGO_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # "django.contrib.humanize", # Handy template tags
-    'suit',
+    "suit",
     "django.contrib.admin",
     "django.contrib.sitemaps",
+    "django_celery_beat",
 ]
-THIRD_PARTY_APPS = [
-]
+THIRD_PARTY_APPS = []
 
 LOCAL_APPS = [
     "team_app",
@@ -199,7 +196,7 @@ LOGGING = {
 # ------------------------------------------------------------------------------
 if USE_TZ:
     CELERY_TIMEZONE = TIME_ZONE
-CELERY_BROKER_URL = env("CELERY_BROKER_URL")
+CELERY_BROKER_URL = env("CELERY_BROKER_URL", default="redis://127.0.0.1")
 CELERY_RESULT_BACKEND = CELERY_BROKER_URL
 CELERY_ACCEPT_CONTENT = ["json"]
 CELERY_TASK_SERIALIZER = "json"
@@ -212,23 +209,27 @@ CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
 # django-suit
 # ------------------------------------------------------------------------------
 SUIT_CONFIG = {
-    'ADMIN_NAME': 'init.py',
-    'MENU': (
-        'sites',
-        {'label': _('Team'),
-         'icon': 'icon-user',
-         'models': (
-             'team_app.teammodel',
-             'team_app.contactmodel',
-             'team_app.servicemodel',
-             'team_app.aboutmodel',
-             'team_app.feedbackmodel',
-         )},
-        {'label': _('Accounts'),
-         'icon': 'icon-user',
-         'models': (
-             'auth.user',
-             'auth.group',
-         )}
+    "ADMIN_NAME": "init.py",
+    "MENU": (
+        "sites",
+        {
+            "label": _("Team"),
+            "icon": "icon-user",
+            "models": (
+                "team_app.teammodel",
+                "team_app.contactmodel",
+                "team_app.servicemodel",
+                "team_app.aboutmodel",
+                "team_app.feedbackmodel",
+            ),
+        },
+        {
+            "label": _("Accounts"),
+            "icon": "icon-user",
+            "models": (
+                "auth.user",
+                "auth.group",
+            ),
+        },
     ),
 }
